@@ -132,7 +132,8 @@ class Emitter(object):
                 f = thing.__emittable__
                 if inspect.ismethod(f) and len(inspect.getargspec(f)[0]) == 1:
                     ret = _any(f())
-            elif repr(thing).startswith("<django.db.models.fields.related.RelatedManager"):
+            elif repr(thing).startswith("<django.db.models.fields.related.RelatedManager") or \
+                    repr(thing).startswith("<django.db.model.fields.related.ManyRelatedManager"):
                 ret = _any(thing.all(), fields)
             else:
                 ret = smart_unicode(thing, strings_only=True)
